@@ -1,13 +1,17 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    public static int currentScore;
     public static int userInput;
     public static String playAgain;
     public static int generateNumber;
     public static int setDifficultyByUser;
     public static Scanner scanner = new Scanner(System.in);
+    public static List<HighScore> highScoreList = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -17,7 +21,9 @@ public class Main {
         // - high score system
 
         while (true) {
-            System.out.println("Select the difficulty: \n"
+            System.out.println("Current score: " + currentScore);
+
+            System.out.println("Select the difficulty:\n"
                     + "1. Easy (10 tries)\n"
                     + "2. Medium (5 tries)\n"
                     + "3. Hard (3 tries)\n");
@@ -76,16 +82,22 @@ public class Main {
                         for (int i = Difficulty.HARD.numberOfTries; i >= 0; i--) {
                             if (i == 0) {
                                 System.out.println("You lost. :(");
-                            } else if (i == 1) {
+                                highScoreList.add(new HighScore(currentScore));
+                            }
+                            if (i == 1) {
                                 System.out.println("You have " + i + " try left to guess the number.");
                                 userInput = scanner.nextInt();
                                 scanner.nextLine();
-                            } else if (i <= Difficulty.HARD.numberOfTries && i > 1) {
+                            }
+                            if (i <= Difficulty.HARD.numberOfTries && i > 1) {
                                 System.out.println("You have " + i + " tries left to guess the number.");
                                 userInput = scanner.nextInt();
                                 scanner.nextLine();
-                            } else if (userInput == generateNumber) {
+                            }
+                            if (userInput == generateNumber) {
                                 System.out.println("You won!");
+                                currentScore += 5;
+                                break;
                             }
                         }
                         break;
@@ -108,6 +120,10 @@ public class Main {
             playAgain = scanner.nextLine();
 
             if (playAgain.equalsIgnoreCase("n")) {
+                highScoreList.add(new HighScore(currentScore));
+                for (HighScore highScore : highScoreList) {
+                    System.out.println(highScore);
+                }
                 break;
             }
 
