@@ -24,6 +24,7 @@ public class Main {
             jsonWriter.createJsonFile();
             highScoreList = jsonWriter.readJsonFile();
 
+            System.out.println("HIGH SCORE:");
             for (HighScore highScore : highScoreList) {
                 System.out.println(highScore);
             }
@@ -144,6 +145,10 @@ public class Main {
 
             if (playAgain.equalsIgnoreCase("n")) {
                 jsonWriter.addHighScore(new HighScore(currentScore));
+                System.out.println("HIGH SCORE:");
+                for (HighScore highScore : highScoreList) {
+                    System.out.println(highScore);
+                }
                 break;
             }
 

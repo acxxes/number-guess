@@ -1,22 +1,20 @@
 package main;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class HighScore {
     private int score;
-    private LocalDateTime localDateTime;
+    private LocalDate localDate;
 
     public HighScore(int score) {
         this.score = score;
-        localDateTime = LocalDateTime.now();
+        localDate = LocalDate.now();
     }
 
     @Override
     public String toString() {
-        return "HighScore{" +
-                "localDateTime=" + localDateTime +
-                ", score=" + score +
-                '}';
+        return "Score[" + score + "]"
+                + " set at: " + localDate;
     }
 
     public int getScore() {

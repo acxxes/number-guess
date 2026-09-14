@@ -4,7 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -53,7 +53,7 @@ public class JsonWriter {
                 }
             });
             // ternary operator
-            return highScores != null ? highScores : new ArrayList<>();
+            return highScores;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,14 +69,14 @@ public class JsonWriter {
             highScores.add(newScore);
             writeJsonFile(highScores);
         } else {
-            System.out.println("Score already exists, not adding.");
+            System.out.println("Have not beaten your score. New data won't be written.");
         }
     }
 
     public Gson buildGson() {
         return new GsonBuilder()
                 .setPrettyPrinting()
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
     }
 
