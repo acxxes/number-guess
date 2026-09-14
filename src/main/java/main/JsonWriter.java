@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class JsonWriter {
-    File file = new File("highscore.json");
+    public static File file = new File("highscore.json");
 
     public void createJsonFile() {
         try {
@@ -43,6 +43,9 @@ public class JsonWriter {
             // it is necessary so the information about <List<HighScore>> survives in the runtime and gson can read from it
             List<HighScore> highScores = buildGson().fromJson(fileReader, new TypeToken<List<HighScore>>() {
             }.getType());
+            if (highScores == null) {
+                highScores = new ArrayList<>();
+            }
             Collections.sort(highScores, new Comparator<HighScore>() {
                 @Override
                 public int compare(HighScore o1, HighScore o2) {

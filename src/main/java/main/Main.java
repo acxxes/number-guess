@@ -37,6 +37,10 @@ public class Main {
             setDifficultyByUser = scanner.nextInt();
             scanner.nextLine();
 
+            if (setDifficultyByUser == 0) {
+                JsonWriter.file.delete();
+            }
+
             while (true) {
                 switch (setDifficultyByUser) {
                     case 1:
@@ -46,16 +50,22 @@ public class Main {
                         for (int i = Difficulty.EASY.numberOfTries; i >= 0; i--) {
                             if (i == 0) {
                                 System.out.println("You lost. :(");
-                            } else if (i == 1) {
+                                highScoreList.add(new HighScore(currentScore));
+                            }
+                            if (i == 1) {
                                 System.out.println("You have " + i + " try left to guess the number.");
                                 userInput = scanner.nextInt();
                                 scanner.nextLine();
-                            } else if (i <= Difficulty.HARD.numberOfTries && i > 1) {
+                            }
+                            if (i <= Difficulty.EASY.numberOfTries && i > 1) {
                                 System.out.println("You have " + i + " tries left to guess the number.");
                                 userInput = scanner.nextInt();
                                 scanner.nextLine();
-                            } else if (userInput == generateNumber) {
+                            }
+                            if (userInput == generateNumber) {
                                 System.out.println("You won!");
+                                currentScore += 5;
+                                break;
                             }
                         }
                         break;
@@ -67,16 +77,22 @@ public class Main {
                         for (int i = Difficulty.MEDIUM.numberOfTries; i >= 0; i--) {
                             if (i == 0) {
                                 System.out.println("You lost. :(");
-                            } else if (i == 1) {
+                                highScoreList.add(new HighScore(currentScore));
+                            }
+                            if (i == 1) {
                                 System.out.println("You have " + i + " try left to guess the number.");
                                 userInput = scanner.nextInt();
                                 scanner.nextLine();
-                            } else if (i <= Difficulty.HARD.numberOfTries && i > 1) {
+                            }
+                            if (i <= Difficulty.MEDIUM.numberOfTries && i > 1) {
                                 System.out.println("You have " + i + " tries left to guess the number.");
                                 userInput = scanner.nextInt();
                                 scanner.nextLine();
-                            } else if (userInput == generateNumber) {
+                            }
+                            if (userInput == generateNumber) {
                                 System.out.println("You won!");
+                                currentScore += 5;
+                                break;
                             }
                         }
                         break;
@@ -110,7 +126,8 @@ public class Main {
                     default:
                         System.out.println("Please choose a difficulty setting.");
                 }
-                if (setDifficultyByUser == 1
+                if (setDifficultyByUser == 0
+                        || setDifficultyByUser == 1
                         || setDifficultyByUser == 2
                         || setDifficultyByUser == 3) {
                     break;

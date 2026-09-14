@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
-        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     /**
      * Writes one JSON value (an array, object, string, number, boolean or null) for {@code value}.
      *
