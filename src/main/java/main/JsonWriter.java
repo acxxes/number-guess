@@ -46,13 +46,27 @@ public class JsonWriter {
             Collections.sort(highScores, new Comparator<HighScore>() {
                 @Override
                 public int compare(HighScore o1, HighScore o2) {
-                    return o1.getScore() - o2.getScore();
+                    return o2.getScore() - o1.getScore();
                 }
             });
             // ternary operator
             return highScores != null ? highScores : new ArrayList<>();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void addHighScore(HighScore newScore) {
+        List<HighScore> highScores = readJsonFile();
+
+        boolean exists = highScores.stream()
+                .anyMatch(hs -> hs.getScore() == newScore.getScore());
+
+        if (!exists) {
+            highScores.add(newScore);
+            writeJsonFile(highScores);
+        } else {
+            System.out.println("Score already exists, not adding.");
         }
     }
 

@@ -17,7 +17,8 @@ public class Main {
         //TODO
         // - timer so see how long user guesses
         // - hint system
-        // - high score system
+        // - high score system (base implemented, formatting needed) <shows error when list is null or doesnt exist>
+
 
         while (true) {
             jsonWriter.createJsonFile();
@@ -125,8 +126,7 @@ public class Main {
             playAgain = scanner.nextLine();
 
             if (playAgain.equalsIgnoreCase("n")) {
-                highScoreList.add(new HighScore(currentScore));
-                jsonWriter.writeJsonFile(highScoreList);
+                jsonWriter.addHighScore(new HighScore(currentScore));
                 break;
             }
 
