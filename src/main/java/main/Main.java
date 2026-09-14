@@ -1,8 +1,6 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static int currentScore;
@@ -12,6 +10,7 @@ public class Main {
     public static int setDifficultyByUser;
     public static Scanner scanner = new Scanner(System.in);
     public static List<HighScore> highScoreList = new ArrayList<>();
+    public static JsonWriter jsonWriter = new JsonWriter();
 
     public static void main(String[] args) {
 
@@ -21,7 +20,13 @@ public class Main {
         // - high score system
 
         while (true) {
-            System.out.println("Current score: " + currentScore);
+            jsonWriter.createJsonFile();
+            highScoreList = jsonWriter.readJsonFile();
+
+            for (HighScore highScore : highScoreList) {
+                System.out.println(highScore);
+            }
+            System.out.println();
 
             System.out.println("Select the difficulty:\n"
                     + "1. Easy (10 tries)\n"
@@ -121,9 +126,7 @@ public class Main {
 
             if (playAgain.equalsIgnoreCase("n")) {
                 highScoreList.add(new HighScore(currentScore));
-                for (HighScore highScore : highScoreList) {
-                    System.out.println(highScore);
-                }
+                jsonWriter.writeJsonFile(highScoreList);
                 break;
             }
 
@@ -140,4 +143,5 @@ public class Main {
     }
 
 }
+
 
