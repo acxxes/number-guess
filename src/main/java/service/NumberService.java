@@ -17,7 +17,7 @@ public class NumberService {
     public static JsonWriter jsonWriter = new JsonWriter();
     public static NumberLogic numberLogic = new NumberLogic();
 
-    public void executeNumberGuess() {
+    public static void executeNumberGuess() {
         while (true) {
             jsonWriter.createJsonFile();
             highScoreList = jsonWriter.readJsonFile();
