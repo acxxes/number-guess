@@ -1,7 +1,6 @@
 package service;
 
 import enums.Difficulty;
-import json.JsonWriter;
 import pojo.HighScore;
 
 import java.util.InputMismatchException;
@@ -9,7 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NumberLogic {
-    public static JsonWriter jsonWriter = new JsonWriter();
+    private static int input;
+    public static int triesCounter = 0;
 
     public void printHighScore(List<HighScore> list) {
         System.out.println("HIGH SCORE:");
@@ -29,7 +29,6 @@ public class NumberLogic {
 
     public void numberGuessingLogic(List<HighScore> list,
                                     Scanner scanner,
-                                    int input,
                                     int currentScore,
                                     Difficulty difficulty) {
 
@@ -38,7 +37,7 @@ public class NumberLogic {
         numberToGenerate = (int) (Math.random() * 100) + 1;
         System.out.println("Generated number: " + numberToGenerate);
         System.out.println("Enter the number to guess:");
-        for (int i = difficulty.numberOfTries; i >= 0; i--) {
+        for (int i = difficulty.numberOfTries - 1; i >= 0; i--) {
             boolean validInput = false;
 
             while (!validInput) {
@@ -66,15 +65,18 @@ public class NumberLogic {
 
             if (input == numberToGenerate) {
                 System.out.println("You won!");
+                triesCounter += 1;
                 NumberService.currentScore += 5;
                 break;
             } else if (i <= difficulty.numberOfTries && i > 1) {
+                triesCounter += 1;
                 System.out.println("You have " + i + " tries left to guess the number.");
             } else if (i == 1) {
+                triesCounter += 1;
                 System.out.println("You have " + i + " try left to guess the number.");
             } else {
                 System.out.println("You lost. :(");
-                list.add(new HighScore(currentScore));
+                list.add(new HighScore(currentScore, triesCounter));
             }
 
 

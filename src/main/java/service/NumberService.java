@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class NumberService {
     public static int currentScore;
-    public static int userInput;
     public static int setDifficultyByUser;
     public static Scanner scanner = new Scanner(System.in);
     public static List<HighScore> highScoreList = new ArrayList<>();
@@ -48,7 +47,6 @@ public class NumberService {
                         numberLogic.numberGuessingLogic(
                                 highScoreList,
                                 scanner,
-                                userInput,
                                 currentScore,
                                 Difficulty.EASY);
                         break;
@@ -56,7 +54,6 @@ public class NumberService {
                         numberLogic.numberGuessingLogic(
                                 highScoreList,
                                 scanner,
-                                userInput,
                                 currentScore,
                                 Difficulty.MEDIUM);
                         break;
@@ -64,7 +61,6 @@ public class NumberService {
                         numberLogic.numberGuessingLogic(
                                 highScoreList,
                                 scanner,
-                                userInput,
                                 currentScore,
                                 Difficulty.HARD);
                         break;
@@ -94,7 +90,7 @@ public class NumberService {
             }
 
             if (playAgain.equalsIgnoreCase("n")) {
-                jsonWriter.addHighScore(new HighScore(currentScore));
+                jsonWriter.addHighScore(new HighScore(currentScore, NumberLogic.triesCounter));
                 break;
             }
 
