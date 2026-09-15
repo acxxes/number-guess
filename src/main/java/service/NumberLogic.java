@@ -4,6 +4,7 @@ import enums.Difficulty;
 import json.JsonWriter;
 import pojo.HighScore;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,6 +39,18 @@ public class NumberLogic {
         System.out.println("Generated number: " + numberToGenerate);
         System.out.println("Enter the number to guess:");
         for (int i = difficulty.numberOfTries; i >= 0; i--) {
+            boolean validInput = false;
+
+            while (!validInput) {
+                try {
+                    input = scanner.nextInt();
+                    scanner.nextLine();
+                    validInput = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("That's not a valid input, please enter a number.");
+                    scanner.nextLine();
+                }
+            }
             int diff = Math.abs(input - numberToGenerate);
             if (diff <= 3) {
                 System.out.println("You are super close!");
@@ -57,12 +70,8 @@ public class NumberLogic {
                 break;
             } else if (i <= difficulty.numberOfTries && i > 1) {
                 System.out.println("You have " + i + " tries left to guess the number.");
-                input = scanner.nextInt();
-                scanner.nextLine();
             } else if (i == 1) {
                 System.out.println("You have " + i + " try left to guess the number.");
-                input = scanner.nextInt();
-                scanner.nextLine();
             } else {
                 System.out.println("You lost. :(");
                 list.add(new HighScore(currentScore));

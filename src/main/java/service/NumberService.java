@@ -5,6 +5,7 @@ import json.JsonWriter;
 import pojo.HighScore;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,8 +27,18 @@ public class NumberService {
             numberLogic.printDifficultyOptions();
             System.out.println("Current score: " + currentScore + "\n");
 
-            setDifficultyByUser = scanner.nextInt();
-            scanner.nextLine();
+            boolean validInput = false;
+
+            while (!validInput) {
+                try {
+                    setDifficultyByUser = scanner.nextInt();
+                    scanner.nextLine();
+                    validInput = true;
+                } catch (InputMismatchException e ) {
+                    System.out.println("That's not a valid input, please enter a number.");
+                    scanner.nextLine();
+                }
+            }
 
             jsonWriter.deleteJson(setDifficultyByUser);
 
@@ -84,10 +95,6 @@ public class NumberService {
 
             if (playAgain.equalsIgnoreCase("n")) {
                 jsonWriter.addHighScore(new HighScore(currentScore));
-                System.out.println("HIGH SCORE:");
-                for (HighScore highScore : highScoreList) {
-                    System.out.println(highScore);
-                }
                 break;
             }
 

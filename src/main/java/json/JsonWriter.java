@@ -78,7 +78,7 @@ public class JsonWriter {
             highScores.add(newScore);
             writeJsonFile(highScores);
         } else {
-            System.out.println("You haven't beaten your score. New data won't be written.");
+            System.out.println("You haven't beaten your score. No new data will be written.");
         }
     }
 

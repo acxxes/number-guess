@@ -7,8 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         //TODO
-        // - timer so see how long user guesses
-        // - hint system
+        // - user guess amount
         // - exception handling
 
         numberService.executeNumberGuess();
