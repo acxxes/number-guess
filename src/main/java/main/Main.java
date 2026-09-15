@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
 
         //TODO
-        // - user guess amount
-        // - exception handling
+        // -add into high score the type of game that was played
+        // -add an option to go for a record in a specific difficulty
 
         numberService.executeNumberGuess();
     }
