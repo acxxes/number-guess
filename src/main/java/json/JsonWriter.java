@@ -1,7 +1,9 @@
-package main;
+package json;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import entities.HighScore;
+import adapter.LocalDateAdapter;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -69,7 +71,7 @@ public class JsonWriter {
             highScores.add(newScore);
             writeJsonFile(highScores);
         } else {
-            System.out.println("Have not beaten your score. New data won't be written.");
+            System.out.println("You haven't beaten your score. New data won't be written.");
         }
     }
 
@@ -78,6 +80,12 @@ public class JsonWriter {
                 .setPrettyPrinting()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
+    }
+    
+    public void deleteJson(int input) {
+        if (input == 0) {
+            JsonWriter.file.delete();
+        }
     }
 
 }
