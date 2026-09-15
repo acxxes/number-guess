@@ -54,7 +54,6 @@ public class JsonWriter {
                     return o2.getScore() - o1.getScore();
                 }
             });
-            // ternary operator
             return highScores;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -88,7 +87,7 @@ public class JsonWriter {
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
     }
-    
+
     public void deleteJson(int input) {
         if (input == 0) {
             JsonWriter.file.delete();
