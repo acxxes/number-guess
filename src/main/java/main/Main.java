@@ -9,6 +9,7 @@ public class Main {
         //TODO
         // - timer so see how long user guesses
         // - hint system
+        // - exception handling
 
         numberService.executeNumberGuess();
     }

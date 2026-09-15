@@ -2,7 +2,7 @@ package json;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import entities.HighScore;
+import pojo.HighScore;
 import adapter.LocalDateAdapter;
 
 import java.io.*;
@@ -62,6 +62,13 @@ public class JsonWriter {
     }
 
     public void addHighScore(HighScore newScore) {
+        // cancels function because static int fields default to 0,
+        // so its wont stop adding a 0 score to the high score table.
+        if (newScore.getScore() <= 0) {
+            System.out.println("No valid score to save.");
+            return;
+        }
+
         List<HighScore> highScores = readJsonFile();
 
         boolean exists = highScores.stream()

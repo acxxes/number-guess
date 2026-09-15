@@ -2,7 +2,7 @@ package service;
 
 import enums.Difficulty;
 import json.JsonWriter;
-import entities.HighScore;
+import pojo.HighScore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,10 +60,8 @@ public class NumberService {
                     default:
                         System.out.println("Please choose a difficulty setting.");
                 }
-                if (setDifficultyByUser == 0
-                        || setDifficultyByUser == 1
-                        || setDifficultyByUser == 2
-                        || setDifficultyByUser == 3) {
+
+                if (setDifficultyByUser >= 0 && setDifficultyByUser <= 3) {
                     break;
                 } else {
                     setDifficultyByUser = scanner.nextInt();
